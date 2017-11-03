@@ -1,0 +1,23 @@
+{
+  "name": "vue-source",
+  "version": "1.0.0",
+  "description": "Global Vue mixin which adds source code comments for components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/davestewart/vue-source.git"
+  },
+  "keywords": [
+    "vue",
+    "debugging"
+  ],
+  "author": "Dave Stewart <dave@davestewart.io>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/davestewart/vue-source/issues"
+  },
+  "homepage": "https://github.com/davestewart/vue-source#readme"
+}
