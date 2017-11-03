@@ -52,7 +52,7 @@ You have access to the following settings:
 
 Render component tags or file paths:
 
->  `type` : `(component|file)`
+>  `type` : `('component'|'file')`
 
 Component tags:
 
