@@ -1,6 +1,6 @@
 {
   "name": "vue-source",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Global Vue mixin which adds source code comments for components",
   "main": "index.js",
   "scripts": {
