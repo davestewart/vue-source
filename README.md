@@ -13,9 +13,15 @@ The plugin has various optional features:
 - manual or automatic activation based on environment variable
 - attach component Vue and file references to the DOM comments
 
-## Default usage
+## Installation and usage
 
-Import and run Vue Source from your main application file:
+Download via NPM:
+
+```
+npm install vue-source --save
+```
+
+Import and run from your main application file:
 
 ```js
 import VueSource from 'vue-source'
@@ -30,9 +36,9 @@ The default settings are:
 - do not attach component and file references to rendered comments
 
 
-## Custom settings
+## Settings
 
-You can also pass settings to `init()` to change its behaviour:
+You can pass settings to `init()` to change Vue Source's behaviour:
 
 ```js
 import VueSource from 'vue-source'
@@ -43,10 +49,6 @@ VueSource.init({
   debug: true
 })
 ```
-
-## Settings
-
-You have access to the following settings:
 
 ### Type
 
