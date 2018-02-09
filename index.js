@@ -7,7 +7,7 @@ export const defaults = {
 }
 
 function comment (type, value) {
-  return ` ${type}: ${value} `
+  return ' ' + type + ': ' + value
 }
 
 function init (options) {
@@ -42,7 +42,16 @@ function init (options) {
             ? comment('file', file)
             : comment('component', auto)
         }
-        else if (type === 'component') {
+        else if (type === 'class') {
+          if (file) {
+            const matches = file.match(/([^\\\/]+)\.vue$/)
+            text = comment('class', matches[1])
+          }
+          else {
+            text = comment('component', auto)
+          }
+        }
+        else if (type === 'tag') {
           text = comment('component', auto)
         }
 
@@ -53,7 +62,8 @@ function init (options) {
 
           // debug
           if (debug) {
-            this.__commentLabel.vue = this
+            this.__commentLabel.vm = this
+            this.__commentLabel.tag = tag
             this.__commentLabel.file = file
           }
         }
