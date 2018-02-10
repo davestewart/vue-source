@@ -1,22 +1,34 @@
 import Vue from 'vue'
 
 export const defaults = {
-  type: 'component',
+  type: 'class',
   active: 'auto',
   debug: true
 }
 
 function comment (type, value) {
-  return ' ' + type + ': ' + value
+  return ` ${type}: ${value} `
 }
 
 function init (options) {
+  // fake env for browser builds
+  let env = !!window
+    ? 'production'
+    : process.env.NODE_ENV
+
+  // build options
   options = Object.assign(defaults, options)
   options.active = options.active === 'auto'
-    ? process.env.NODE_ENV !== 'production'
+    ? env !== 'production'
     : !!options.active
 
-  const { type, active, debug } = options
+  const {type, active, debug} = options
+
+  // exits
+  if (!['file', 'class', 'tag'].includes(type)) {
+    console.warn(`VueSource: invalid option type '${type}'`)
+    return
+  }
 
   if (!active) {
     return
@@ -37,22 +49,25 @@ function init (options) {
 
         // text
         let text
-        if (type === 'file') {
-          text = file
-            ? comment('file', file)
-            : comment('component', auto)
-        }
-        else if (type === 'class') {
-          if (file) {
-            const matches = file.match(/([^\\\/]+)\.vue$/)
-            text = comment('class', matches[1])
-          }
-          else {
-            text = comment('component', auto)
-          }
-        }
-        else if (type === 'tag') {
-          text = comment('component', auto)
+        switch (type) {
+
+          case 'file':
+              text = comment('file', file || '<none>')
+            break
+
+          case 'class':
+            if (file) {
+              const matches = file.match(/([^\\\/]+)\.vue$/)
+              text = comment('class', matches[1])
+            }
+            else {
+              text = comment('class', auto.replace(/(^\w|-\w)/g, char => char.replace('-', '').toUpperCase()))
+            }
+            break
+
+          case 'tag':
+            text = comment('tag', auto)
+            break
         }
 
         // insert
@@ -65,6 +80,9 @@ function init (options) {
             this.__commentLabel.vm = this
             this.__commentLabel.tag = tag
             this.__commentLabel.file = file
+            if (this.$inspect) {
+              this.__commentLabel.inspect = () => this.$inspect()
+            }
           }
         }
       }
@@ -78,6 +96,6 @@ function init (options) {
   })
 }
 
-export default {
+export {
   init
 }
