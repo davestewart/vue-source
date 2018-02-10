@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VueSource Demo</title>
+
+  <!-- libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+
+  <!-- package -->
+  <script src="../dist/vue-source.umd.js"></script>
+
+  <!-- local -->
+  <style>
+    article {
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      background: #EEE;
+    }
+  </style>
+</head>
+<body class="section">
+
+  <div id="app">
+    <p>Check the DevTools Elements panel to see VueSource in action:</p>
+    <foo-widget></foo-widget>
+    <bar-widget></bar-widget>
+    <baz-widget></baz-widget>
+  </div>
+
+  <router-view></router-view>
+
+  <script>
+    var FooWidget = { template: `<article>Foo Widget</article>` }
+    var BarWidget = { template: `<article>Bar Widget</article>` }
+    var BazWidget = { template: `<article>Baz Widget</article>` }
+
+    VueSource.init({
+      type: 'class',
+      active: true, // force init because we're in the browser,
+      debug: true
+    })
+
+    // router
+    Vue.use(VueRouter)
+    var router = new VueRouter({
+      routes:[
+        { path: '/foo', component: FooWidget }
+      ]
+    })
+
+    var app = new Vue({
+      router,
+      components: {
+        FooWidget,
+        BarWidget,
+        BazWidget
+      },
+    }).$mount('#app')
+  </script>
+</body>
+</html>
