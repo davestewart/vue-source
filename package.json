@@ -1,23 +1,45 @@
 {
   "name": "vue-source",
   "version": "1.0.4",
-  "description": "Global Vue mixin which adds source code comments for components",
-  "main": "index.js",
+  "description": "Global Vue mixin which identifies components in source code with HTML comments",
+  "xmain": "index.js",
+
+  "main": "dist/vue-source.cjs.js",
+  "module": "dist/vue-source.esm.js",
+  "browser": "dist/vue-source.umd.js",
+
+  "files": [
+    "index.js",
+    "dist/*"
+  ],
   "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/davestewart/vue-source.git"
   },
+  "author": "Dave Stewart <dave@davestewart.io>",
+  "homepage": "https://github.com/davestewart/vue-source#readme",
+  "license": "MIT",
   "keywords": [
     "vue",
     "debugging"
   ],
-  "author": "Dave Stewart <dave@davestewart.io>",
-  "license": "MIT",
   "bugs": {
     "url": "https://github.com/davestewart/vue-source/issues"
   },
-  "homepage": "https://github.com/davestewart/vue-source#readme"
+  "devDependencies": {
+    "babel-core": "^6.26.0",
+    "babel-plugin-external-helpers": "^6.22.0",
+    "babel-preset-env": "^1.6.1",
+    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-commonjs": "^8.3.0",
+    "rollup-plugin-node-resolve": "^3.0.2"
+  },
+  "dependencies": {
+    "vue": "^2.5.13"
+  }
 }
