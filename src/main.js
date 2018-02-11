@@ -51,7 +51,9 @@ function install (Vue, options) {
         switch (type) {
 
           case 'file':
-              text = comment('file', file || '<none>')
+            if (file) {
+              text = comment('file', file)
+            }
             break
 
           case 'class':
@@ -65,8 +67,12 @@ function install (Vue, options) {
             break
 
           case 'tag':
-            text = comment('tag', auto)
+            text = comment('component', auto)
             break
+        }
+
+        if (!text) {
+          text = comment('component', auto)
         }
 
         // insert

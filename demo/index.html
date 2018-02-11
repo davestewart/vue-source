@@ -4,8 +4,8 @@
   <title>VueSource Demo</title>
 
   <!-- libraries -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
 
   <!-- package -->
@@ -13,7 +13,7 @@
 
   <!-- local -->
   <style>
-    article {
+    article, a{
       display: inline-block;
       margin-top: 10px;
       padding: 6px 12px;
@@ -26,42 +26,36 @@
 
   <div id="app">
     <p>Check the DevTools Elements panel to see VueSource in action:</p>
-    <foo-widget></foo-widget>
-    <bar-widget></bar-widget>
-    <baz-widget></baz-widget>
+
+    <!-- custom component -->
+    <widget></widget>
+
+    <!-- router link -->
+    <router-link to="/">Router link</router-link>
   </div>
 
-  <router-view></router-view>
-
   <script>
-    var FooWidget = { template: `<article>Foo Widget</article>` }
-    var BarWidget = { template: `<article>Bar Widget</article>` }
-    var BazWidget = { template: `<article>Baz Widget</article>` }
+    var Widget = { template: `<article>Widget</article>` }
 
-    console.log(VueSource)
-
+    // vue source
     Vue.use(VueSource, {
       type: 'class',
-      active: true, // force init because we're in the browser,
+      active: true, // force active because we're not in development
       debug: true
     })
 
     // router
     Vue.use(VueRouter)
-    var router = new VueRouter({
-      routes:[
-        { path: '/foo', component: FooWidget }
-      ]
-    })
+    var router = new VueRouter()
 
+    // app
     var app = new Vue({
+      el: '#app',
       router,
       components: {
-        FooWidget,
-        BarWidget,
-        BazWidget
+        Widget,
       },
-    }).$mount('#app')
+    })
   </script>
 </body>
 </html>
