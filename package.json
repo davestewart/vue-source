@@ -2,16 +2,10 @@
   "name": "vue-source",
   "version": "1.0.4",
   "description": "Global Vue mixin which identifies components in source code with HTML comments",
-
-  "main": "./dist/vue-source.cjs.js",
-  "module": "dist/vue-source.esm.js",
-  "jsnext:main": "dist/vue-source.esm.js",
-  "browser": {
-    "index.js": "./dist/vue-source.umd.js"
-  },
-
+  "module": "src/main.js",
+  "jsnext:main": "src/main.js",
+  "main": "dist/bundle.js",
   "files": [
-    "index.js",
     "dist/*"
   ],
   "scripts": {
@@ -28,20 +22,15 @@
   "license": "MIT",
   "keywords": [
     "vue",
+    "development",
     "debugging"
   ],
   "bugs": {
     "url": "https://github.com/davestewart/vue-source/issues"
   },
   "devDependencies": {
-    "babel-core": "^6.26.0",
-    "babel-plugin-external-helpers": "^6.22.0",
-    "babel-preset-env": "^1.6.1",
-    "rollup-plugin-babel": "^3.0.3",
+    "rollup-plugin-buble": "^0.19.1",
     "rollup-plugin-commonjs": "^8.3.0",
-    "rollup-plugin-node-resolve": "^3.0.2"
-  },
-  "dependencies": {
-    "vue": "^2.5.13"
+    "rollup-plugin-uglify": "^3.0.0"
   }
 }
