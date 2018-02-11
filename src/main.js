@@ -77,16 +77,16 @@ function install (Vue, options) {
 
         // insert
         if (text) {
-          this.__commentLabel = document.createComment(text)
-          this.$el.parentNode.insertBefore(this.__commentLabel, this.$el)
+          const el = this.__vueSource = document.createComment(text)
+          this.$el.parentNode.insertBefore(el, this.$el)
 
           // debug
           if (debug) {
-            this.__commentLabel.vm = this
-            this.__commentLabel.tag = tag
-            this.__commentLabel.file = file
-            this.__commentLabel.class = className
-            this.__commentLabel.inspect = () => {
+            el.vm = this
+            el.tag = tag
+            el.file = file
+            el.class = className
+            el.inspect = () => {
               if (this.$inspect) {
                 this.$inspect()
               }
@@ -97,8 +97,8 @@ function install (Vue, options) {
     },
 
     destroyed () {
-      if (this.__commentLabel) {
-        this.__commentLabel.remove()
+      if (this.__vueSource) {
+        this.__vueSource.remove()
       }
     }
   })
