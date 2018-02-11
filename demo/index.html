@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>VueSource Demo</title>
+
+  <!-- libraries -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.5.13/vue.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/3.0.1/vue-router.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css" />
+
+  <!-- package -->
+  <script src="../dist/bundle.js"></script>
+
+  <!-- local -->
+  <style>
+    article, a{
+      display: inline-block;
+      margin-top: 10px;
+      padding: 6px 12px;
+      border-radius: 4px;
+      background: #EEE;
+    }
+  </style>
+</head>
+<body class="section">
+
+  <div id="app">
+    <p>Check the DevTools Elements panel to see VueSource in action:</p>
+
+    <!-- custom component -->
+    <widget></widget>
+
+    <!-- router link -->
+    <router-link to="/">Router link</router-link>
+  </div>
+
+  <script>
+    var Widget = { template: `<article>Widget</article>` }
+
+    // vue source
+    Vue.use(VueSource, {
+      type: 'class',
+      active: true, // force active because we're not in development
+      debug: true
+    })
+
+    // router
+    Vue.use(VueRouter)
+    var router = new VueRouter()
+
+    // app
+    var app = new Vue({
+      el: '#app',
+      router,
+      components: {
+        Widget,
+      },
+    })
+  </script>
+</body>
+</html>
