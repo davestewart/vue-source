@@ -38,7 +38,9 @@
     var BarWidget = { template: `<article>Bar Widget</article>` }
     var BazWidget = { template: `<article>Baz Widget</article>` }
 
-    VueSource.init({
+    console.log(VueSource)
+
+    Vue.use(VueSource, {
       type: 'class',
       active: true, // force init because we're in the browser,
       debug: true

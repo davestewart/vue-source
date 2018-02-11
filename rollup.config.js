@@ -1,48 +1,29 @@
 import resolve from 'rollup-plugin-node-resolve'
 import commonjs from 'rollup-plugin-commonjs';
+import babel from 'rollup-plugin-babel';
 import pkg from './package.json';
 
-/*
-import resolve from 'rollup-plugin-node-resolve'
-import babel from 'rollup-plugin-babel';
-const old = {
-  input: 'src/vue-source.js',
-  output: {
-    name: 'VueSource',
-    file: 'index.js',
-    format: 'cjs',
-    globals: {
-      vue: 'Vue',
-    },
-  },
-  external: [
-    'vue'
-  ],
-  plugins: [
-    resolve(),
-    babel({
-      exclude: 'node_modules/**'
-    })
-  ],
-}
-*/
+const external = Object.keys(require('./package.json').dependencies || {});
 
 export default [
   // browser-friendly UMD build
   {
-    input: 'src/vue-source.js',
-    external: ['vue'],
+    input: 'src/browser.js',
+    external: external,
     output: {
       globals: {
         vue: 'Vue',
       },
       name: 'VueSource',
-      file: pkg.browser,
-      format: 'umd'
+      file: pkg.browser['index.js'],
+      format: 'umd',
     },
     plugins: [
-      resolve(), // so Rollup can find `vue`
-      commonjs() // so Rollup can convert `vue` to an ES module
+      resolve(),  // so Rollup can find `vue`
+      commonjs(), // so Rollup can convert `vue` to an ES module
+      babel({
+        exclude: 'node_modules/**'
+      }),
     ]
   },
 
@@ -54,10 +35,11 @@ export default [
   // `file` and `format` for each target)
   {
     input: 'src/vue-source.js',
-    external: ['vue'],
+    external: external,
     output: [
       { file: pkg.main, format: 'cjs' },
       { file: pkg.module, format: 'es' }
     ]
+
   }
 ];

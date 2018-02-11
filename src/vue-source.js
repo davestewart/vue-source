@@ -1,8 +1,6 @@
-import Vue from 'vue'
-
-export const defaults = {
-  type: 'class',
+const defaults = {
   active: 'auto',
+  type: 'class',
   debug: true
 }
 
@@ -10,9 +8,9 @@ function comment (type, value) {
   return ` ${type}: ${value} `
 }
 
-function init (options) {
+function install (Vue, options) {
   // fake env for browser builds
-  let env = !!window
+  let env = typeof process === 'undefined'
     ? 'production'
     : process.env.NODE_ENV
 
@@ -46,6 +44,7 @@ function init (options) {
             return (a + '-' + b)
           }))
           .toLowerCase()
+        const className = auto.replace(/(^\w|-\w)/g, char => char.replace('-', '').toUpperCase())
 
         // text
         let text
@@ -61,7 +60,7 @@ function init (options) {
               text = comment('class', matches[1])
             }
             else {
-              text = comment('class', auto.replace(/(^\w|-\w)/g, char => char.replace('-', '').toUpperCase()))
+              text = comment('class', className)
             }
             break
 
@@ -80,8 +79,11 @@ function init (options) {
             this.__commentLabel.vm = this
             this.__commentLabel.tag = tag
             this.__commentLabel.file = file
-            if (this.$inspect) {
-              this.__commentLabel.inspect = () => this.$inspect()
+            this.__commentLabel.class = className
+            this.__commentLabel.inspect = () => {
+              if (this.$inspect) {
+                this.$inspect()
+              }
             }
           }
         }
@@ -96,6 +98,7 @@ function init (options) {
   })
 }
 
-export {
-  init
+export default {
+  install,
+  defaults
 }

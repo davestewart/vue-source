@@ -2,11 +2,13 @@
   "name": "vue-source",
   "version": "1.0.4",
   "description": "Global Vue mixin which identifies components in source code with HTML comments",
-  "xmain": "index.js",
 
-  "main": "dist/vue-source.cjs.js",
+  "main": "./dist/vue-source.cjs.js",
   "module": "dist/vue-source.esm.js",
-  "browser": "dist/vue-source.umd.js",
+  "jsnext:main": "dist/vue-source.esm.js",
+  "browser": {
+    "index.js": "./dist/vue-source.umd.js"
+  },
 
   "files": [
     "index.js",
