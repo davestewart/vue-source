@@ -38,7 +38,7 @@ const min = Object.assign({}, umd, {
 })
 
 const es = Object.assign({}, umd, {
-  output: output('bundle.es.js', 'es')
+  output: output('bundle.esm.js', 'es')
 })
 
 export default [umd, min, es]
