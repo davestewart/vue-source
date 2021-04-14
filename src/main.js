@@ -38,12 +38,17 @@ function install (Vue, options) {
         // variables
         const file = this.$vnode.componentInstance.$options.__file
         const tag = this.$vnode.componentOptions.tag
-        const auto = (tag || file
-          .match(/([^/\\]+)\.vue/).pop()
-          .replace(/([a-z])([A-Z])/g, function (input, a, b) {
-            return (a + '-' + b)
-          }))
+        const auto = (tag
+          ? tag
+          : file
+            ? file.match(/([^/\\]+)\..*?/).pop()
+              .replace(/([a-z])([A-Z])/g, function (input, a, b) {
+                return (a + '-' + b)
+              })
+          : 'anonymous'
+        )
           .toLowerCase()
+
         const className = auto.replace(/(^\w|-\w)/g, char => char.replace('-', '').toUpperCase())
 
         // text
@@ -58,7 +63,7 @@ function install (Vue, options) {
 
           case 'class':
             if (file) {
-              const matches = file.match(/([^\\\/]+)\.vue$/)
+              const matches = file.match(/([^\\\/]+)\..*?$/)
               text = comment('class', matches[1])
             }
             else {

@@ -1,6 +1,6 @@
 {
   "name": "vue-source",
-  "version": "1.1.1",
+  "version": "1.2.0",
   "description": "Global Vue mixin which identifies components in source code with HTML comments",
   "module": "dist/bundle.esm.js",
   "jsnext:main": "dist/bundle.esm.js",
@@ -29,6 +29,7 @@
     "url": "https://github.com/davestewart/vue-source/issues"
   },
   "devDependencies": {
+    "rollup": "^1.32.0",
     "rollup-plugin-buble": "^0.19.1",
     "rollup-plugin-commonjs": "^8.3.0",
     "rollup-plugin-uglify": "^3.0.0"
